@@ -1,8 +1,5 @@
 package com.sbertech;
 
-import com.sbertech.GetRateResponse;
-import com.sbertech.GetRate;
-import com.sbertech.RateServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,10 +14,21 @@ public class GrpcClientService implements RequestSender {
         channel = ManagedChannelBuilder.forAddress(address, port).usePlaintext().build();
     }
 
+    @Override
     public double getRate(String currencyFrom, String currencyTo) {
         RateServiceGrpc.RateServiceBlockingStub stub = RateServiceGrpc.newBlockingStub(channel);
 
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+        }
+
         GetRateResponse response = stub.getCurrencyRate(GetRate.newBuilder().setCurrencyFrom(currencyFrom).setCurrencyFrom(currencyTo).build());
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+        }
 
         return response.getRate();
     }
