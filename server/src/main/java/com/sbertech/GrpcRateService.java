@@ -21,6 +21,11 @@ public class GrpcRateService extends RateServiceGrpc.RateServiceImplBase {
     ) {
         double rate = rateProvider.GetRate(request.getCurrencyFrom(), request.getCurrencyTo());
 
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+        }
+
         GetRateResponse.Builder response = GetRateResponse.newBuilder().setRate(rate);
 
         responseObserver.onNext(response.build());
