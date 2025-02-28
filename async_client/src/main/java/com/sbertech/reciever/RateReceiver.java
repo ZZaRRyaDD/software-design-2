@@ -1,10 +1,10 @@
 package com.sbertech.reciever;
 
-import com.sbertech.GetRateResponse;
+import com.sbertech.models.Rate;
 
 import java.time.LocalTime;
 
-public class RateReceiver implements Receiver<GetRateResponse> {
+public class RateReceiver implements Receiver<Rate> {
 
     private final LocalTime timeStartExecuteRequest;
 
@@ -13,7 +13,7 @@ public class RateReceiver implements Receiver<GetRateResponse> {
     }
 
     @Override
-    public void onObject(GetRateResponse rate) {
+    public void onObject(Rate rate) {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
