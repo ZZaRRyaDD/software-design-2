@@ -1,8 +1,8 @@
-package com.sbertech;
+package com.sbertech.request_sender;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sbertech.request_sender.RequestSender;
+import com.sbertech.models.Rate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +36,7 @@ public class HttpClientService implements RequestSender {
         HttpResponse<String> response = null;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
@@ -47,7 +45,6 @@ public class HttpClientService implements RequestSender {
         try {
             rate = objectMapper.readValue(response.body(), Rate.class);
         } catch (JsonProcessingException e) {
-            System.err.println(e);
             throw new RuntimeException(e);
         }
 

@@ -1,5 +1,6 @@
-package com.sbertech.request_sender;
+package com.sbertech;
 
+import com.sbertech.request_sender.RequestSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
