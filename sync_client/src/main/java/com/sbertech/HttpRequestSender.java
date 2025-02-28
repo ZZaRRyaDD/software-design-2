@@ -1,21 +1,19 @@
-package com.sbertech;
+package com.sbertech.request_sender;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
-import java.util.concurrent.Executors;
 
 @Service
-public class GrpcRequestSender {
+public class HttpRequestSender {
 
     @Autowired
-    private RequestSender grpcClientService;
+    private RequestSender clientService;
 
-    public GrpcRequestSender(RequestSender grpcClientService) {
-        this.grpcClientService = grpcClientService;
+    public HttpRequestSender(RequestSender clientService) {
+        this.clientService = clientService;
     }
 
 //    @PostConstruct
@@ -35,7 +33,7 @@ public class GrpcRequestSender {
     public void printRate() {
         String currencyFrom = "USD", currencyTo = "RUB";
         try {
-            double rate = grpcClientService.getRate(currencyFrom, currencyTo);
+            double rate = clientService.getRate(currencyFrom, currencyTo);
             System.out.println("Local Time: " + LocalTime.now() + ", Currency From: " + currencyFrom + ", Currency To: " + currencyTo + ", Result: " + rate);
         } catch (Exception ignored) {
         }

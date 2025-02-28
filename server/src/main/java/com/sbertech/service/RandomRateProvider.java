@@ -1,5 +1,6 @@
-package com.sbertech.services.rate_provider;
+package com.sbertech.service;
 
+import com.sbertech.model.Rate;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -10,7 +11,7 @@ public class RandomRateProvider implements RateProvider {
     final double rateMax = 80;
 
     @Override
-    public double GetRate(String currencyFrom, String currencyTo) {
-        return new Random().nextDouble(rateMin, rateMax);
+    public Rate GetRate(String currencyFrom, String currencyTo) {
+        return new Rate(new Random().nextDouble(rateMin, rateMax));
     }
 }
